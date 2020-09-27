@@ -1,0 +1,63 @@
+﻿@page "/"
+@using RVids.Data
+
+<div class="wrapper">
+	<nav class="main-nav">
+		<ul>
+			<li><a href="/"><h1>RVids</h1></a></li>
+		</ul>
+
+		<input @bind="@CurrentValue" type="text" name="search" id="search">
+	</nav>
+	
+	<main class="video-player">
+		<video src="@VideoSrc" controls id="video-id"/>
+	</main>
+	
+	<aside class="video-list">
+		<ul>
+			@if (@CurrentValue == "")
+			{
+				@foreach (Video video in _videos)
+				{
+					<li class="test">
+						<a @onclick="@(() => VideoSrc = "http://localhost:5000/Vids/" + @video.VideoName)" href="/">
+							<h2>@video.VideoName</h2>
+							<div class="circle">
+								<div class="triangle"></div>
+							</div>
+						</a>
+					</li>
+				}
+			}
+		</ul>
+	</aside>
+	
+	<footer class="video-info">
+		<ul class="bottom-nav">
+			<li><a href="/">Info</a></li>
+			<li><a @onclick="@(() => VideoSrc = VideoService.GetRandomVideo())" href="/">Random</a></li>
+			<li><a href="/">Rating</a></li>
+		</ul>
+		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aspernatur commodi doloribus expedita facere
+			libero
+			numquam officiis totam unde velit.
+		</p>
+	</footer>
+</div>
+
+
+@code{
+	private string CurrentValue { get; set; } = "";
+	private List<Video> _videos;
+	private int _index;
+	protected override void OnInitialized()
+	{
+		_videos = VideoService.GetVideos();
+		_index = 0;
+	}
+
+	public string VideoSrc { get; set; } = VideoService.GetRandomVideo();
+
+	
+}
