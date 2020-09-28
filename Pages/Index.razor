@@ -21,7 +21,7 @@
 				@foreach (Video video in _videos)
 				{
 					<li class="test">
-						<a @onclick="@(() => VideoSrc = "http://localhost:5000/Vids/" + @video.VideoName)" href="/">
+						<a @onclick="@(() => VideoSrc = $"http://{VideoService.GetIpAddress()}:5000/Vids/{video.VideoName}")" href="/">
 							<h2>@video.VideoName</h2>
 							<div class="circle">
 								<div class="triangle"></div>

@@ -31,7 +31,7 @@ namespace RVids.Data
             return files;
         }
 
-        private static string GetIpAddress()
+        public static string GetIpAddress()
         {
             string hostName = Dns.GetHostName();
             // Gets the 0.0.0.0 numbers
