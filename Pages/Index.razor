@@ -51,6 +51,7 @@
 	private string CurrentValue { get; set; } = "";
 	private List<Video> _videos;
 	private int _index;
+	
 	protected override void OnInitialized()
 	{
 		_videos = VideoService.GetVideos();
@@ -59,5 +60,4 @@
 
 	public string VideoSrc { get; set; } = VideoService.GetRandomVideo();
 
-	
 }

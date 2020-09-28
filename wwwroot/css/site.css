@@ -166,40 +166,11 @@ aside > ul > li:hover {
     top: 0.5rem;
 }
 
-@media (max-width: 767.98px) {
-    .bottom-nav > ul > li {
-        padding: 0;
+@media screen and (max-width: 1024px){
+    body{
+        font-size: 15px;
     }
-}
-
-@media (min-width: 768px) {
-    app {
-        flex-direction: row;
-    }
-
-    .sidebar {
-        width: 250px;
-        height: 100vh;
-        position: sticky;
-        top: 0;
-    }
-
-    .main .top-row {
-        position: sticky;
-        top: 0;
-    }
-
-    .main > div {
-        padding-left: 2rem !important;
-        padding-right: 1.5rem !important;
-    }
-
-    .navbar-toggler {
-        display: none;
-    }
-
-    .sidebar .collapse {
-        /* Never collapse the sidebar for wide screens */
-        display: block;
+    footer > ul > li{
+        padding: 10px 0 10px 180px;
     }
 }
