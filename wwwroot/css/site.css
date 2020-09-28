@@ -170,7 +170,12 @@ aside > ul > li:hover {
     body{
         font-size: 15px;
     }
+    video {
+        max-height: 500px;
+        width: 100%;
+    }
     footer > ul > li{
-        padding: 10px 0 10px 180px;
+        font-size: 20px;
+        padding: 10px 0 10px 160px;
     }
 }
