@@ -15,7 +15,6 @@ namespace RVids.Data
             Random rand = new Random();
             int randomIndex = rand.Next(0, GetVideos().Count);
 
-            Console.WriteLine(randomIndex);
             return BuildVideoPath(randomIndex);
         }
 	   
