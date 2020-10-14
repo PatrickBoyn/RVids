@@ -1,20 +1,18 @@
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using RVids.Data;
 
 namespace RVids
 {
 
     public class Program
     {
-        public static void Main(string[] args) { CreateHostBuilder(args).Build().Run(); }
+        public static void Main(string[] args)
+        {
+            Console.WriteLine($"http://{VideoService.GetIpAddress()}:5000");
+            CreateHostBuilder(args).Build().Run();
+        }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
