@@ -7,7 +7,7 @@
 			<li><a href="/"><h1>RVids</h1></a></li>
 		</ul>
 
-		<input @bind="@CurrentValue" type="text" name="search" id="search">
+		<input @bind="@CurrentVideo" type="text" name="search" id="search">
 	</nav>
 	
 	<main class="video-player">
@@ -16,7 +16,7 @@
 	
 	<aside class="video-list">
 		<ul>
-			@if (@CurrentValue == "")
+			@if (CurrentVideo == "")
 			{
 				@foreach (Video video in _videos)
 				{
@@ -48,7 +48,7 @@
 
 
 @code{
-	private string CurrentValue { get; set; } = "";
+	private string CurrentVideo { get; set; } = "";
 	private List<Video> _videos;
 	private int _index;
 	
