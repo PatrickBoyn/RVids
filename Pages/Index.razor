@@ -39,10 +39,10 @@
 			<li><a @onclick="@(() => VideoSrc = VideoService.GetRandomVideo())" href="/">Random</a></li>
 			<li><a href="/">Rating</a></li>
 		</ul>
-		<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ab aspernatur commodi doloribus expedita facere
-			libero
-			numquam officiis totam unde velit.
-		</p>
+		@foreach (string videoName in _videoNames)
+		{
+			<p>@videoName</p>
+		}
 	</footer>
 </div>
 
@@ -50,14 +50,21 @@
 @code{
 	private string CurrentVideo { get; set; } = "";
 	private List<Video> _videos;
+	private List<string> _videoNames;
 	private int _index;
+
+	protected override void OnAfterRender(bool firstRender)
+	{
+		_videoNames.Add(VideoSrc);
+	}
 	
 	protected override void OnInitialized()
 	{
 		_videos = VideoService.GetVideos();
+		_videoNames = new List<string>();
 		_index = 0;
 	}
-
+	
 	public string VideoSrc { get; set; } = VideoService.GetRandomVideo();
 
 }
