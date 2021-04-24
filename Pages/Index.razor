@@ -1,24 +1,35 @@
 ﻿@page "/"
 @using RVids.Data
+@inject IJSRuntime JsRuntime
 
 <div class="wrapper">
 	<nav class="main-nav">
 		<ul>
 			<li><a href="/"><h1>RVids</h1></a></li>
 		</ul>
+		
+		@* <select name="random-ordered" id="random-ordered" @onchange="@((e) => Test(e))"> *@
+		@* 	<option @bind="@_videos" value="_videos">Ordered List</option> *@
+		@* 	<option @bind="@_randomVideos" value="randomVideos">Random List</option> *@
+		@* </select> *@
+		
+		<select @onchange="@((e) => Test(e))">
+			<option value="_videos">Ordered List</option>
+			<option value="_randomVideos">Random List</option>
+		</select>
 
 		<input @bind="@CurrentVideo" type="text" name="search" id="search">
 	</nav>
 	
 	<main class="video-player">
-		<video src="@VideoSrc" controls id="video-id"/>
+		<video src="@VideoSrc" controls id="video-id"></video>
 	</main>
 	
 	<aside class="video-list">
 		<ul>
 			@if (CurrentVideo == "")
 			{
-				@foreach (Video video in _videos)
+				@foreach (Video video in _options)
 				{
 					<li class="test">
 						<a @onclick="@(() => VideoSrc = $"http://{VideoService.GetIpAddress()}:5000/Vids/{video.VideoName}")" href="/">
@@ -36,7 +47,7 @@
 	<footer class="video-info">
 		<ul class="bottom-nav">
 			<li><a href="/">Info</a></li>
-			<li><a @onclick="@(() => VideoSrc = VideoService.GetRandomVideo())" href="/">Random</a></li>
+			<li><a @onclick="@(() => { VideoSrc = VideoService.GetRandomVideo();})" href="/">Random</a></li>
 			<li><a href="/">Rating</a></li>
 		</ul>
 		@foreach (string videoName in _videoNames)
@@ -49,9 +60,10 @@
 
 @code{
 	private string CurrentVideo { get; set; } = "";
+	private List<Video> _options;
 	private List<Video> _videos;
+	private static List<Video> _randomVideos;
 	private List<string> _videoNames;
-	private int _index;
 
 	protected override void OnAfterRender(bool firstRender)
 	{
@@ -61,10 +73,24 @@
 	protected override void OnInitialized()
 	{
 		_videos = VideoService.GetVideos();
+		_randomVideos = VideoService.GetRandomList();
+		_options = _videos;
 		_videoNames = new List<string>();
-		_index = 0;
 	}
-	
-	public string VideoSrc { get; set; } = VideoService.GetRandomVideo();
 
+	public void Test(ChangeEventArgs e)
+	{
+		JsRuntime.InvokeVoidAsync("console.log", e);
+		if (e.Value.Equals("_videos"))
+		{
+			_options = _videos;
+		}
+		else
+		{
+			_options = _randomVideos;
+		}
+		// _options = e.Value as List<Video>;
+	}
+
+	public string VideoSrc { get; set; } = VideoService.GetRandomVideo();
 }
