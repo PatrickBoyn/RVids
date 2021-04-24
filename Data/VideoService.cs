@@ -9,13 +9,13 @@ namespace RVids.Data
 
     public class VideoService
     {
-        private const string path =
-            @"C:\Users\dakil\OneDrive\Humble\Machine Learning\The Complete Machine Learning Course with Python\thecompletemachinelearningcoursewithpython_video\Section 2";
+        
+        private static string path2 = @"D:\Extras\";
         public static string GetRandomVideo()
         {
             Random rand = new Random();
             int randomIndex = rand.Next(0, GetVideos().Count);
-
+            
             return BuildVideoPath(randomIndex);
         }
 	   
@@ -25,7 +25,7 @@ namespace RVids.Data
         
         private static List<FileInfo> GetVids()
         {
-            DirectoryInfo info = new DirectoryInfo(path);
+            DirectoryInfo info = new DirectoryInfo(path2);
             List<FileInfo> files = info.GetFiles("*.mp4").OrderBy(v => v.Name).ToList();
 	
             return files;
@@ -34,15 +34,28 @@ namespace RVids.Data
         public static string GetIpAddress()
         {
             string hostName = Dns.GetHostName();
-            // Gets the 0.0.0.0 numbers
-            string ipEntry = Dns.GetHostEntry(hostName).AddressList[2].ToString();
-
+            // Gets the IP Address numbers
+            string ipEntry = Dns.GetHostEntry(hostName).AddressList[3].ToString();
             return ipEntry;
         }
 
+        public static List<Video> GetRandomList()
+        {
+            DirectoryInfo info = new DirectoryInfo(path2);
+            FileInfo[] files = info.GetFiles("*.mp4");
+            List<Video> videos = files.Select(file => new Video
+                                     {
+                                         VideoName = file.Name, VideoPath = $"http://{GetIpAddress()}:5000/{file.Name}"
+                                     })
+                                    .ToList();
+            videos.Shuffle();
+            
+            return videos;
+        }
+        
         public static List<Video> GetVideos()
         {
-            DirectoryInfo info = new DirectoryInfo(path);
+            DirectoryInfo info = new DirectoryInfo(path2);
             FileInfo[] files = info.GetFiles("*.mp4");
 
             return files.Select(file => new Video {VideoName = file.Name, VideoPath = $"http://{GetIpAddress()}:5000/{file.Name}"}).ToList();
