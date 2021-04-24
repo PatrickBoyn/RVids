@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RVids.Data
 {
@@ -20,6 +21,12 @@ namespace RVids.Data
                 list[k] = list[n];
                 list[n] = value;
             }
+        }
+
+        public static IEnumerable<T> RandomizeCollection<T>(this IEnumerable<T> source)
+        {
+            Random rand = new Random();
+            return source.OrderBy(item => rand.Next());
         }
     }
 
