@@ -52,16 +52,16 @@ namespace RVids
                 FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, @"D:\Extras")),
                 RequestPath = "/Vids"
             });
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, @"C:\Users\dakil\OneDrive\Humble\Machine Learning\The Complete Machine Learning Course with Python\thecompletemachinelearningcoursewithpython_video\Section 2")),
-                RequestPath = "/Vids"
-            });
-            app.UseStaticFiles(new StaticFileOptions
-            {
-                FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, @"C:\Users\dakil\Music\iTunes\iTunes Media\TV Shows\LOST\Season 1")),
-                RequestPath = "/Vids"
-            });
+            // app.UseStaticFiles(new StaticFileOptions
+            // {
+            //     FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, @"C:\Users\dakil\OneDrive\Humble\Machine Learning\The Complete Machine Learning Course with Python\thecompletemachinelearningcoursewithpython_video\Section 2")),
+            //     RequestPath = "/Vids"
+            // });
+            // app.UseStaticFiles(new StaticFileOptions
+            // {
+            //     FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, @"C:\Users\dakil\Music\iTunes\iTunes Media\TV Shows\LOST\Season 1")),
+            //     RequestPath = "/Vids"
+            // });
             
             app.UseStaticFiles();
 
