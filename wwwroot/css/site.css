@@ -147,6 +147,16 @@ aside > ul > li:hover {
     border: 6px solid #6093f9;
 }
 
+select {
+    padding: 10px;
+    background-color: navy;
+    color: white;
+    font-weight: bold;
+    font-size: 18px;
+    border: 6px solid #6093f9;
+    -moz-appearance: none;
+}
+
 
 #blazor-error-ui {
     background: lightyellow;
