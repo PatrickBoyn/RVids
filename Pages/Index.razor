@@ -52,7 +52,7 @@
 		</ul>
 		@foreach (string videoName in _videoNames)
 		{
-			<p>@videoName</p>
+			<a class="footer-link" @onclick="() => { VideoSrc = videoName; }" >@videoName</a>
 		}
 	</footer>
 </div>
@@ -89,7 +89,6 @@
 		{
 			_options = _randomVideos;
 		}
-		// _options = e.Value as List<Video>;
 	}
 
 	public string VideoSrc { get; set; } = VideoService.GetRandomVideo();
