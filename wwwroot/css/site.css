@@ -137,7 +137,10 @@ a {
     text-decoration: none;
     color: white;
 }
-
+.footer-link {
+    cursor: pointer;
+    display: block;
+}
 nav {
     list-style: none;
 }
